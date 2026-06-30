@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Vocalink — Platform Profesional Sarjana Terapan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
+<style>
+/* ===== RESET & ROOT ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --blue: #0EA5E9;
+  --blue-dark: #0284C7;
+  --blue-light: rgba(14,165,233,0.08);
+  --teal: #4DD9AC;
+  --teal-dark: #0D9488;
+  --teal-light: rgba(77,217,172,0.12);
+  --navy: #0D2D3A;
+  --navy2: #1E4A5C;
+  --slate: #2C6E8A;
+  --foam: #F0FFFE;
+  --white: #ffffff;
+  --gray-50: #F8FAFC;
+  --gray-100: #F1F5F9;
+  --gray-200: #E2E8F0;
+  --gray-400: #94A3B8;
+  --gray-500: #64748B;
+  --gray-700: #334155;
+  --amber: #F59E0B;
+  --amber-light: rgba(245,158,11,0.1);
+  --rose: #F43F5E;
+  --violet: #8B5CF6;
+  --violet-light: rgba(139,92,246,0.1);
+  --badge-green: #E0F7F3;
+  --badge-green-text: #0A6652;
+  --grad: linear-gradient(135deg, #0EA5E9 0%, #4DD9AC 100%);
+  --grad-r: linear-gradient(135deg, #4DD9AC 0%, #0EA5E9 100%);
+  --shadow-sm: 0 1px 3px rgba(14,165,233,0.08);
+  --shadow-md: 0 4px 16px rgba(14,165,233,0.12);
+  --shadow-lg: 0 8px 32px rgba(14,165,233,0.16);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--foam); color: var(--navy); overflow-x: hidden; }
+
+/* ===== PAGE SYSTEM ===== */
+.page { display: none; min-height: 100vh; }
+.page.active { display: block; }
+
+/* ===== SHARED COMPONENTS ===== */
+
+/* Navbar */
+.vl-nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2rem; height: 64px;
+  background: rgba(240,255,254,0.94); backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(77,217,172,0.18);
+  position: sticky; top: 0; z-index: 200;
+}
+.vl-logo {
+  font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800;
+  background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text; letter-spacing: -0.5px; cursor: pointer;
+}
+.vl-nav-links { display: flex; gap: 1.5rem; align-items: center; }
+.vl-nav-links a { font-size: 14px; font-weight: 500; color: var(--slate); text-decoration: none; cursor: pointer; transition: color .2s; }
+.vl-nav-links a:hover { color: var(--blue); }
+.btn-outline { border: 1.5px solid var(--blue); color: var(--blue); background: transparent; padding: 7px 18px; border-radius: var(--radius-sm); font-size: 14px; font-weight: 500; cursor: pointer; transition: all .2s; font-family: 'Inter', sans-serif; }
+.btn-outline:hover { background: var(--blue-light); }
+.btn-solid { border: none; color: #fff; background: var(--grad); padding: 8px 20px; border-radius: var(--radius-sm); font-size: 14px; font-weight: 600; cursor: pointer; transition: opacity .2s, transform .15s; font-family: 'Inter', sans-serif; }
+.btn-solid:hover { opacity: .9; transform: translateY(-1px); }
+.btn-lg { padding: 12px 28px; font-size: 15px; border-radius: var(--radius-md); }
+
+/* Avatars */
+.av { width: 48px; height: 48px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; color: #fff; flex-shrink: 0; position: relative; }
+.av-sm { width: 36px; height: 36px; border-radius: 8px; font-size: 13px; }
+.av-lg { width: 60px; height: 60px; border-radius: 14px; font-size: 20px; }
+.av-xl { width: 80px; height: 80px; border-radius: 18px; font-size: 26px; }
+.av-blue { background: linear-gradient(135deg, #0EA5E9, #0284C7); }
+.av-teal { background: linear-gradient(135deg, #4DD9AC, #0D9488); }
+.av-navy { background: linear-gradient(135deg, #1E4A5C, #0D2D3A); }
+.av-cyan { background: linear-gradient(135deg, #22D3EE, #0EA5E9); }
+.av-emerald { background: linear-gradient(135deg, #34D399, #059669); }
+.av-indigo { background: linear-gradient(135deg, #818CF8, #4338CA); }
+.av-rose { background: linear-gradient(135deg, #FB7185, #E11D48); }
+.av-amber { background: linear-gradient(135deg, #FCD34D, #D97706); }
+
+.online-dot { position: absolute; bottom: -2px; right: -2px; width: 12px; height: 12px; border-radius: 50%; background: var(--teal); border: 2px solid #fff; }
+
+/* Skill tags */
+.tag { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; background: var(--badge-green); color: var(--badge-green-text); }
+.tag-blue { background: rgba(14,165,233,0.1); color: #0369A1; }
+.tag-violet { background: var(--violet-light); color: #6D28D9; }
+.tag-amber { background: var(--amber-light); color: #92400E; }
+
+/* Section title */
+.sec-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; }
+.sec-title { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; color: var(--navy); }
+.sec-link { font-size: 13px; color: var(--blue); font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 4px; }
+.sec-link:hover { text-decoration: underline; }
+
+/* ===== LANDING PAGE ===== */
+#page-landing {}
+
+.hero {
+  background: linear-gradient(160deg, var(--navy) 0%, var(--navy2) 55%, #0A3D52 100%);
+  padding: 80px 2rem 88px; text-align: center; position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; top: -80px; right: -80px; width: 420px; height: 420px;
+  border-radius: 50%; background: radial-gradient(circle, rgba(77,217,172,0.12) 0%, transparent 70%); pointer-events: none;
+}
+.hero::after {
+  content: ''; position: absolute; bottom: -100px; left: -60px; width: 360px; height: 360px;
+  border-radius: 50%; background: radial-gradient(circle, rgba(14,165,233,0.1) 0%, transparent 70%); pointer-events: none;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(77,217,172,0.15); border: 1px solid rgba(77,217,172,0.35);
+  color: var(--teal); font-size: 12px; font-weight: 600;
+  padding: 5px 14px; border-radius: 20px; letter-spacing: .5px; margin-bottom: 1.5rem; text-transform: uppercase;
+}
+.hero h1 { font-family: 'Syne', sans-serif; font-size: 46px; font-weight: 800; color: #fff; line-height: 1.12; margin-bottom: 1rem; letter-spacing: -1.5px; }
+.hero h1 span { background: linear-gradient(90deg, #4DD9AC, #0EA5E9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero p { color: rgba(255,255,255,.65); font-size: 16px; max-width: 480px; margin: 0 auto 2.5rem; line-height: 1.7; }
+.hero-search {
+  display: flex; align-items: center; background: rgba(255,255,255,.08);
+  border: 1.5px solid rgba(77,217,172,.3); border-radius: 14px;
+  padding: 6px 6px 6px 18px; max-width: 560px; margin: 0 auto 1.5rem;
+  backdrop-filter: blur(10px); gap: 8px;
+}
+.hero-search i { color: rgba(255,255,255,.45); font-size: 18px; flex-shrink: 0; }
+.hero-search input { flex: 1; background: transparent; border: none; outline: none; color: #fff; font-size: 15px; font-family: 'Inter', sans-serif; }
+.hero-search input::placeholder { color: rgba(255,255,255,.4); }
+.hero-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 2rem; }
+.hero-tag { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); color: rgba(255,255,255,.7); font-size: 12px; padding: 4px 12px; border-radius: 20px; cursor: pointer; transition: all .18s; }
+.hero-tag:hover { background: rgba(77,217,172,.2); border-color: rgba(77,217,172,.4); color: var(--teal); }
+.hero-stats { display: flex; justify-content: center; gap: 2.5rem; margin-top: 1.5rem; }
+.hero-stat-num { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 700; color: var(--teal); }
+.hero-stat-lbl { font-size: 12px; color: rgba(255,255,255,.45); margin-top: 2px; }
+
+/* Filter bar */
+.filter-bar { display: flex; align-items: center; gap: 10px; padding: 1.25rem 2rem; background: #fff; border-bottom: 1px solid rgba(14,165,233,.1); overflow-x: auto; scrollbar-width: none; }
+.filter-bar::-webkit-scrollbar { display: none; }
+.filter-lbl { font-size: 13px; font-weight: 600; color: var(--slate); white-space: nowrap; flex-shrink: 0; }
+.chip { display: inline-flex; align-items: center; gap: 5px; padding: 5px 14px; border-radius: 20px; border: 1.5px solid rgba(14,165,233,.22); font-size: 13px; font-weight: 500; color: var(--slate); cursor: pointer; background: transparent; white-space: nowrap; flex-shrink: 0; transition: all .18s; font-family: 'Inter', sans-serif; }
+.chip:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
+.chip.active { background: var(--grad); border-color: transparent; color: #fff; }
+
+/* Main area */
+.main { padding: 2rem; max-width: 1140px; margin: 0 auto; }
+
+/* Stats strip */
+.stats-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 2.5rem; }
+.stat-card { background: #fff; border-radius: var(--radius-md); border: 1.5px solid rgba(14,165,233,.1); padding: 1.1rem 1.25rem; display: flex; align-items: center; gap: 12px; }
+.stat-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.si-blue { background: var(--blue-light); color: var(--blue); }
+.si-teal { background: var(--teal-light); color: var(--teal-dark); }
+.si-navy { background: rgba(13,45,58,.08); color: var(--navy); }
+.si-amber { background: var(--amber-light); color: #B45309; }
+.stat-num { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 700; color: var(--navy); line-height: 1; }
+.stat-lbl { font-size: 12px; color: var(--gray-400); margin-top: 3px; }
+
+/* Profile cards */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; margin-bottom: 2.5rem; }
+.vl-card { background: #fff; border-radius: var(--radius-lg); border: 1.5px solid rgba(14,165,233,.12); padding: 1.25rem; cursor: pointer; transition: transform .2s, border-color .2s, box-shadow .2s; position: relative; overflow: hidden; }
+.vl-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--grad); opacity: 0; transition: opacity .2s; }
+.vl-card:hover { transform: translateY(-3px); border-color: rgba(77,217,172,.4); box-shadow: var(--shadow-lg); }
+.vl-card:hover::before { opacity: 1; }
+.vl-card.featured { border-color: rgba(77,217,172,.5); background: linear-gradient(160deg, #fff 70%, rgba(77,217,172,.04) 100%); }
+.vl-card.featured::before { opacity: 1; }
+.card-top { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
+.card-info { flex: 1; min-width: 0; }
+.card-name { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; color: var(--navy); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.card-degree { font-size: 12px; color: var(--blue); font-weight: 500; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.card-loc { display: flex; align-items: center; gap: 3px; font-size: 11px; color: var(--gray-400); margin-top: 4px; }
+.card-bio { font-size: 13px; color: var(--gray-500); line-height: 1.55; margin-bottom: 12px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.card-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+.card-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 12px; border-top: 1px solid rgba(14,165,233,.08); }
+.card-exp { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--gray-500); }
+.card-exp i { color: var(--blue); font-size: 14px; }
+.contact-icons { display: flex; gap: 8px; }
+.contact-icons a { width: 28px; height: 28px; border-radius: 7px; background: var(--blue-light); display: flex; align-items: center; justify-content: center; color: var(--blue); font-size: 14px; text-decoration: none; cursor: pointer; transition: background .18s; }
+.contact-icons a:hover { background: rgba(14,165,233,.2); }
+.feat-badge { position: absolute; top: 12px; right: 12px; background: var(--grad); color: #fff; font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: 20px; letter-spacing: .5px; text-transform: uppercase; }
+.connect-btn { border: 1.5px solid rgba(14,165,233,.35); background: transparent; color: var(--blue); font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 7px; cursor: pointer; transition: all .18s; font-family: 'Inter', sans-serif; flex-shrink: 0; }
+.connect-btn:hover { background: var(--blue); color: #fff; border-color: var(--blue); }
+
+/* Prodi grid */
+.prodi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+.prodi-card { background: #fff; border: 1.5px solid rgba(14,165,233,.12); border-radius: var(--radius-md); padding: 1rem; text-align: center; cursor: pointer; transition: all .2s; }
+.prodi-card:hover { border-color: var(--teal); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+.prodi-card i { font-size: 22px; color: var(--blue); margin-bottom: 8px; display: block; }
+.prodi-name { font-size: 12px; font-weight: 600; color: var(--navy); line-height: 1.4; }
+.prodi-count { font-size: 11px; color: var(--gray-400); margin-top: 3px; }
+
+/* How it works */
+.how-section { background: #fff; border-radius: var(--radius-xl); padding: 2.5rem 2rem; margin-bottom: 2.5rem; }
+.how-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+.how-col { }
+.how-col-title { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; }
+.how-col-title .badge { font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: 20px; text-transform: uppercase; letter-spacing: .5px; }
+.badge-lulusan { background: var(--teal-light); color: var(--teal-dark); }
+.badge-recruiter { background: var(--blue-light); color: var(--blue-dark); }
+.how-step { display: flex; gap: 12px; margin-bottom: 16px; }
+.how-num { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+.num-teal { background: var(--teal-light); color: var(--teal-dark); }
+.num-blue { background: var(--blue-light); color: var(--blue-dark); }
+.how-step-title { font-size: 13px; font-weight: 600; color: var(--navy); margin-bottom: 2px; }
+.how-step-desc { font-size: 12px; color: var(--gray-500); line-height: 1.55; }
+
+/* Premium section */
+.premium-banner {
+  background: linear-gradient(135deg, #0D2D3A 0%, #1E4A5C 100%);
+  border-radius: var(--radius-xl); padding: 2.5rem; margin-bottom: 2.5rem;
+  display: flex; align-items: center; gap: 2rem; position: relative; overflow: hidden;
+}
+.premium-banner::after { content: ''; position: absolute; top: -40%; right: -5%; width: 300px; height: 300px; border-radius: 50%; background: radial-gradient(circle, rgba(77,217,172,.1) 0%, transparent 70%); pointer-events: none; }
+.premium-text { flex: 1; position: relative; z-index: 1; }
+.premium-eyebrow { display: inline-flex; align-items: center; gap: 6px; background: rgba(245,158,11,.15); border: 1px solid rgba(245,158,11,.3); color: var(--amber); font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; letter-spacing: .5px; text-transform: uppercase; margin-bottom: 12px; }
+.premium-text h3 { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: #fff; line-height: 1.3; margin-bottom: 8px; }
+.premium-text p { color: rgba(255,255,255,.6); font-size: 13px; line-height: 1.6; margin-bottom: 16px; }
+.premium-perks { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+.perk { display: flex; align-items: center; gap: 6px; font-size: 12px; color: rgba(255,255,255,.75); }
+.perk i { color: var(--teal); font-size: 14px; }
+.btn-premium { background: linear-gradient(135deg, var(--amber) 0%, #F97316 100%); border: none; color: #fff; padding: 10px 24px; border-radius: var(--radius-sm); font-size: 14px; font-weight: 700; cursor: pointer; font-family: 'Inter', sans-serif; transition: opacity .2s; }
+.btn-premium:hover { opacity: .9; }
+.premium-mock { width: 200px; flex-shrink: 0; position: relative; z-index: 1; }
+.premium-card-mock { background: rgba(255,255,255,.08); border: 1.5px solid rgba(77,217,172,.3); border-radius: 14px; padding: 14px; backdrop-filter: blur(8px); }
+.pm-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.pm-star { width: 20px; height: 20px; background: linear-gradient(135deg, var(--amber), #F97316); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #fff; }
+.pm-name { font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700; color: #fff; }
+.pm-role { font-size: 10px; color: rgba(255,255,255,.6); }
+.pm-bar { height: 3px; border-radius: 2px; background: var(--grad); margin-bottom: 8px; }
+.pm-tags { display: flex; gap: 4px; flex-wrap: wrap; }
+.pm-tag { font-size: 9px; padding: 2px 7px; border-radius: 10px; background: rgba(77,217,172,.2); color: var(--teal); font-weight: 600; }
+.highlight-ring { position: absolute; top: -4px; left: -4px; right: -4px; bottom: -4px; border-radius: 18px; border: 2px solid var(--amber); opacity: .6; pointer-events: none; }
+
+/* CTA */
+.cta-section { background: linear-gradient(135deg, var(--navy), var(--navy2)); border-radius: var(--radius-xl); padding: 2.5rem 2rem; text-align: center; margin-bottom: 2rem; position: relative; overflow: hidden; }
+.cta-section::after { content: ''; position: absolute; top: -50%; right: -10%; width: 300px; height: 300px; border-radius: 50%; background: radial-gradient(circle, rgba(77,217,172,.1) 0%, transparent 70%); pointer-events: none; }
+.cta-section h2 { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 800; color: #fff; margin-bottom: .5rem; position: relative; z-index: 1; }
+.cta-section h2 span { background: linear-gradient(90deg, #4DD9AC, #0EA5E9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.cta-section p { color: rgba(255,255,255,.6); font-size: 14px; margin-bottom: 1.5rem; position: relative; z-index: 1; }
+.cta-btns { display: flex; gap: 12px; justify-content: center; position: relative; z-index: 1; }
+
+/* Footer */
+.vl-footer { background: var(--navy); padding: 2rem; text-align: center; }
+.footer-logo { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 8px; }
+.vl-footer p { font-size: 12px; color: rgba(255,255,255,.35); }
+
+/* ===== REGISTER PAGE ===== */
+#page-register {
+  background: linear-gradient(160deg, var(--navy) 0%, var(--navy2) 100%);
+  display: none; min-height: 100vh;
+}
+#page-register.active { display: flex; align-items: stretch; }
+
+.reg-left {
+  flex: 1; padding: 3rem; display: flex; flex-direction: column; justify-content: center;
+  max-width: 440px; position: relative;
+}
+.reg-left::after { content: ''; position: absolute; bottom: -80px; left: -60px; width: 300px; height: 300px; border-radius: 50%; background: radial-gradient(circle, rgba(14,165,233,.12) 0%, transparent 70%); pointer-events: none; }
+.reg-logo { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 2.5rem; cursor: pointer; }
+.reg-heading { font-family: 'Syne', sans-serif; font-size: 32px; font-weight: 800; color: #fff; line-height: 1.2; margin-bottom: 1rem; }
+.reg-heading span { background: linear-gradient(90deg, #4DD9AC, #0EA5E9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.reg-sub { color: rgba(255,255,255,.6); font-size: 14px; line-height: 1.7; margin-bottom: 2rem; }
+.reg-features { display: flex; flex-direction: column; gap: 14px; }
+.reg-feat { display: flex; align-items: center; gap: 12px; }
+.reg-feat-icon { width: 36px; height: 36px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+.rfi-teal { background: var(--teal-light); color: var(--teal); }
+.rfi-blue { background: var(--blue-light); color: var(--blue); }
+.rfi-amber { background: var(--amber-light); color: var(--amber); }
+.reg-feat-text { font-size: 13px; color: rgba(255,255,255,.75); }
+.reg-feat-text strong { color: #fff; display: block; font-size: 14px; margin-bottom: 1px; }
+
+.reg-right {
+  flex: 1; background: var(--foam); padding: 3rem 2.5rem;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+}
+.reg-form-wrap { width: 100%; max-width: 420px; }
+
+/* Role selector */
+.role-selector { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 2rem; }
+.role-card { border: 2px solid var(--gray-200); border-radius: var(--radius-md); padding: 1.25rem; cursor: pointer; transition: all .2s; background: #fff; text-align: center; }
+.role-card:hover { border-color: var(--blue); background: var(--blue-light); }
+.role-card.selected { border-color: var(--blue); background: linear-gradient(135deg, rgba(14,165,233,.06), rgba(77,217,172,.06)); }
+.role-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin: 0 auto 10px; }
+.ri-teal { background: var(--teal-light); color: var(--teal-dark); }
+.ri-blue { background: var(--blue-light); color: var(--blue-dark); }
+.role-label { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: var(--navy); }
+.role-desc { font-size: 11px; color: var(--gray-500); margin-top: 4px; line-height: 1.4; }
+
+.form-title { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 700; color: var(--navy); margin-bottom: .5rem; }
+.form-sub { font-size: 13px; color: var(--gray-500); margin-bottom: 1.75rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form-group { margin-bottom: 14px; }
+.form-label { font-size: 12px; font-weight: 600; color: var(--navy); margin-bottom: 5px; display: block; }
+.form-input {
+  width: 100%; background: #fff; border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm);
+  padding: 10px 14px; font-size: 14px; font-family: 'Inter', sans-serif; color: var(--navy);
+  outline: none; transition: border-color .18s;
+}
+.form-input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(14,165,233,.08); }
+.form-input::placeholder { color: var(--gray-400); }
+select.form-input { cursor: pointer; }
+.form-hint { font-size: 11px; color: var(--gray-400); margin-top: 4px; }
+.form-divider { display: flex; align-items: center; gap: 10px; margin: 1.25rem 0; }
+.form-divider span { font-size: 12px; color: var(--gray-400); white-space: nowrap; }
+.form-divider::before, .form-divider::after { content: ''; flex: 1; height: 1px; background: var(--gray-200); }
+.btn-full { width: 100%; padding: 12px; border-radius: var(--radius-md); font-size: 15px; }
+.form-footer { text-align: center; font-size: 13px; color: var(--gray-500); margin-top: 16px; }
+.form-footer a { color: var(--blue); font-weight: 500; cursor: pointer; }
+
+/* Recruiter-specific form fields */
+.rec-fields { display: none; }
+.rec-fields.show { display: block; }
+.lul-fields { display: none; }
+.lul-fields.show { display: block; }
+
+/* Multi-step form */
+.step-indicator { display: flex; align-items: center; gap: 8px; margin-bottom: 2rem; }
+.step-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gray-200); transition: all .2s; }
+.step-dot.active { width: 24px; border-radius: 4px; background: var(--grad); }
+.step-dot.done { background: var(--teal); }
+
+/* ===== DASHBOARD LULUSAN ===== */
+#page-dashboard-lul { display: none; }
+#page-dashboard-lul.active { display: block; }
+
+.dash-layout { display: flex; min-height: calc(100vh - 64px); }
+
+/* Sidebar */
+.sidebar { width: 240px; background: #fff; border-right: 1px solid rgba(14,165,233,.1); padding: 1.5rem 1rem; flex-shrink: 0; position: sticky; top: 64px; height: calc(100vh - 64px); overflow-y: auto; }
+.sidebar-section-title { font-size: 10px; font-weight: 700; color: var(--gray-400); letter-spacing: 1px; text-transform: uppercase; margin: 1rem 0 .5rem .75rem; }
+.sidebar-item { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: var(--radius-sm); cursor: pointer; transition: all .18s; margin-bottom: 2px; }
+.sidebar-item i { font-size: 18px; color: var(--gray-400); flex-shrink: 0; }
+.sidebar-item span { font-size: 13px; font-weight: 500; color: var(--gray-500); }
+.sidebar-item:hover { background: var(--blue-light); }
+.sidebar-item:hover i, .sidebar-item:hover span { color: var(--blue); }
+.sidebar-item.active { background: linear-gradient(135deg, rgba(14,165,233,.08), rgba(77,217,172,.06)); }
+.sidebar-item.active i, .sidebar-item.active span { color: var(--blue); font-weight: 600; }
+.sidebar-badge { margin-left: auto; background: var(--blue); color: #fff; font-size: 10px; font-weight: 700; padding: 1px 7px; border-radius: 10px; }
+.sidebar-premium { background: linear-gradient(135deg, rgba(245,158,11,.1), rgba(249,115,22,.08)); border: 1px solid rgba(245,158,11,.25); border-radius: var(--radius-md); padding: 14px; margin-top: 1rem; }
+.sp-title { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+.sp-desc { font-size: 11px; color: var(--gray-500); line-height: 1.5; margin-bottom: 10px; }
+
+/* Dash content */
+.dash-content { flex: 1; padding: 1.75rem; background: var(--gray-50); overflow-y: auto; }
+.dash-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 1.75rem; }
+.dash-greeting { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 700; color: var(--navy); }
+.dash-sub { font-size: 13px; color: var(--gray-500); margin-top: 3px; }
+
+/* Profile completion */
+.profile-complete { background: #fff; border-radius: var(--radius-lg); border: 1.5px solid rgba(14,165,233,.12); padding: 1.25rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+.pc-bar-wrap { flex: 1; }
+.pc-label { font-size: 13px; font-weight: 600; color: var(--navy); margin-bottom: 6px; display: flex; justify-content: space-between; }
+.pc-bar { height: 8px; background: var(--gray-100); border-radius: 4px; overflow: hidden; }
+.pc-fill { height: 100%; border-radius: 4px; background: var(--grad); transition: width .4s ease; }
+.pc-hint { font-size: 11px; color: var(--gray-400); margin-top: 6px; }
+
+/* Insight cards */
+.insights-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 1.5rem; }
+.insight-card { background: #fff; border-radius: var(--radius-md); border: 1.5px solid rgba(14,165,233,.1); padding: 1.1rem; display: flex; align-items: center; gap: 12px; }
+.ic-icon { width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.ic-num { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 700; color: var(--navy); line-height: 1; }
+.ic-lbl { font-size: 11px; color: var(--gray-400); margin-top: 2px; }
+.ic-trend { font-size: 11px; font-weight: 600; margin-top: 2px; }
+.trend-up { color: #059669; }
+.trend-down { color: var(--rose); }
+
+/* Portfolio section */
+.portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+.porto-card { background: #fff; border-radius: var(--radius-md); border: 1.5px solid rgba(14,165,233,.1); overflow: hidden; cursor: pointer; transition: all .2s; }
+.porto-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.porto-thumb { height: 100px; display: flex; align-items: center; justify-content: center; font-size: 28px; }
+.pt-teal { background: linear-gradient(135deg, rgba(77,217,172,.2), rgba(14,165,233,.1)); }
+.pt-blue { background: linear-gradient(135deg, rgba(14,165,233,.15), rgba(139,92,246,.1)); }
+.pt-amber { background: linear-gradient(135deg, rgba(245,158,11,.15), rgba(249,115,22,.1)); }
+.pt-navy { background: linear-gradient(135deg, rgba(13,45,58,.1), rgba(30,74,92,.15)); }
+.porto-body { padding: 12px; }
+.porto-title { font-size: 13px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+.porto-desc { font-size: 11px; color: var(--gray-500); line-height: 1.45; }
+.porto-add { border: 2px dashed var(--gray-200); background: transparent; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; cursor: pointer; min-height: 160px; border-radius: var(--radius-md); color: var(--gray-400); font-size: 12px; transition: all .2s; }
+.porto-add:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
+.porto-add i { font-size: 24px; }
+
+/* Sertifikat */
+.cert-list { display: flex; flex-direction: column; gap: 10px; }
+.cert-item { background: #fff; border-radius: var(--radius-md); border: 1.5px solid rgba(14,165,233,.1); padding: 12px 14px; display: flex; align-items: center; gap: 12px; transition: all .2s; cursor: pointer; }
+.cert-item:hover { border-color: rgba(77,217,172,.4); }
+.cert-icon { width: 38px; height: 38px; border-radius: 9px; background: linear-gradient(135deg, rgba(77,217,172,.15), rgba(14,165,233,.1)); display: flex; align-items: center; justify-content: center; font-size: 16px; color: var(--teal-dark); flex-shrink: 0; }
+.cert-name { font-size: 13px; font-weight: 600; color: var(--navy); }
+.cert-issuer { font-size: 11px; color: var(--gray-500); margin-top: 2px; }
+.cert-date { font-size: 11px; color: var(--gray-400); margin-left: auto; white-space: nowrap; }
+.cert-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 10px; }
+.cert-valid { background: rgba(5,150,105,.1); color: #059669; }
+
+/* ===== DASHBOARD RECRUITER ===== */
+#page-dashboard-rec { display: none; }
+#page-dashboard-rec.active { display: block; }
+
+/* Recruiter sidebar */
+.rec-insight-panel { background: #fff; border-radius: var(--radius-lg); border: 1.5px solid rgba(14,165,233,.12); padding: 1.25rem; margin-bottom: 1.5rem; }
+.rec-panel-title { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 1rem; }
+
+/* Search panel */
+.search-panel { background: #fff; border-radius: var(--radius-lg); border: 1.5px solid rgba(14,165,233,.12); padding: 1.25rem; margin-bottom: 1.5rem; }
+.search-panel-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+.advanced-search { display: flex; align-items: center; gap: 8px; background: var(--gray-50); border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm); padding: 10px 14px; }
+.advanced-search input { flex: 1; border: none; background: transparent; outline: none; font-size: 14px; font-family: 'Inter', sans-serif; color: var(--navy); }
+.advanced-search input::placeholder { color: var(--gray-400); }
+.advanced-search i { color: var(--gray-400); font-size: 16px; }
+.filter-chips-wrap { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.filter-chip { display: flex; align-items: center; gap: 5px; padding: 5px 12px; border-radius: 20px; border: 1.5px solid var(--gray-200); font-size: 12px; font-weight: 500; color: var(--gray-500); cursor: pointer; background: transparent; font-family: 'Inter', sans-serif; transition: all .18s; }
+.filter-chip:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
+.filter-chip.on { background: var(--grad); border-color: transparent; color: #fff; }
+.filter-chip i { font-size: 12px; }
+
+/* Candidate match cards */
+.match-score { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; }
+.score-bar { width: 60px; height: 6px; border-radius: 3px; background: var(--gray-100); overflow: hidden; }
+.score-fill { height: 100%; border-radius: 3px; }
+.score-high { background: linear-gradient(90deg, var(--teal), #22C55E); }
+.score-med { background: linear-gradient(90deg, var(--amber), #F97316); }
+.match-num { color: var(--navy); }
+
+/* Company info sidebar card */
+.company-card { background: linear-gradient(135deg, rgba(14,165,233,.04), rgba(77,217,172,.04)); border: 1.5px solid rgba(14,165,233,.15); border-radius: var(--radius-md); padding: 14px; margin-bottom: 12px; }
+.company-card-head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.company-logo { width: 40px; height: 40px; border-radius: 10px; background: var(--grad); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: #fff; }
+.company-name { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: var(--navy); }
+.company-type { font-size: 11px; color: var(--gray-500); }
+.company-detail { font-size: 12px; color: var(--gray-500); display: flex; align-items: center; gap: 6px; margin-bottom: 5px; }
+.company-detail i { color: var(--blue); font-size: 13px; }
+
+/* Insight rows for recruiter */
+.rec-insights { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 1.5rem; }
+.ri-card { background: #fff; border-radius: var(--radius-md); border: 1.5px solid rgba(14,165,233,.1); padding: 1rem 1.1rem; }
+.ri-lbl { font-size: 11px; color: var(--gray-400); margin-bottom: 6px; font-weight: 500; text-transform: uppercase; letter-spacing: .5px; }
+.ri-val { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 700; color: var(--navy); line-height: 1; }
+.ri-sub { font-size: 11px; color: var(--gray-500); margin-top: 4px; }
+
+/* Recommendation banner for recruiter */
+.rec-rec-banner { background: linear-gradient(135deg, var(--navy), var(--navy2)); border-radius: var(--radius-lg); padding: 1.25rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 12px; }
+.rrb-icon { width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(135deg, rgba(77,217,172,.2), rgba(14,165,233,.15)); display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--teal); flex-shrink: 0; }
+.rrb-text { flex: 1; }
+.rrb-title { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 2px; }
+.rrb-desc { font-size: 12px; color: rgba(255,255,255,.55); }
+
+/* Toast notification */
+.toast { position: fixed; bottom: 24px; right: 24px; background: var(--navy); color: #fff; padding: 12px 18px; border-radius: var(--radius-md); font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 10px; z-index: 999; opacity: 0; transform: translateY(10px); transition: all .25s; pointer-events: none; }
+.toast.show { opacity: 1; transform: translateY(0); }
+.toast i { color: var(--teal); font-size: 16px; }
+
+/* ===== PROFILE DETAIL PAGE ===== */
+#page-profile { display: none; }
+#page-profile.active { display: block; }
+
+.profile-hero { background: linear-gradient(160deg, var(--navy) 0%, var(--navy2) 100%); padding: 2rem; }
+.profile-hero-inner { max-width: 860px; margin: 0 auto; display: flex; align-items: flex-start; gap: 1.5rem; }
+.profile-av-wrap { position: relative; }
+.profile-premium-ring { position: absolute; top: -4px; left: -4px; right: -4px; bottom: -4px; border-radius: 22px; border: 2.5px solid var(--amber); }
+.profile-info { flex: 1; }
+.profile-name { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 800; color: #fff; }
+.profile-degree { font-size: 14px; color: var(--teal); font-weight: 500; margin-top: 4px; }
+.profile-loc { font-size: 13px; color: rgba(255,255,255,.55); margin-top: 4px; display: flex; align-items: center; gap: 5px; }
+.profile-bio { font-size: 14px; color: rgba(255,255,255,.75); margin-top: 10px; line-height: 1.6; max-width: 560px; }
+.profile-actions { display: flex; gap: 10px; margin-top: 1.25rem; }
+.profile-content { max-width: 860px; margin: 0 auto; padding: 2rem; display: grid; grid-template-columns: 1fr 280px; gap: 1.5rem; }
+.profile-main {}
+.profile-sidebar {}
+.profile-section { background: #fff; border-radius: var(--radius-lg); border: 1.5px solid rgba(14,165,233,.1); padding: 1.25rem; margin-bottom: 1.25rem; }
+.ps-title { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; }
+.ps-title i { color: var(--blue); }
+.exp-item { display: flex; gap: 12px; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--gray-100); }
+.exp-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.exp-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--grad); margin-top: 5px; flex-shrink: 0; }
+.exp-title { font-size: 14px; font-weight: 600; color: var(--navy); }
+.exp-company { font-size: 13px; color: var(--blue); }
+.exp-period { font-size: 12px; color: var(--gray-400); }
+.exp-desc { font-size: 13px; color: var(--gray-500); margin-top: 6px; line-height: 1.55; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .hero h1 { font-size: 30px; }
+  .stats-strip { grid-template-columns: 1fr 1fr; }
+  .how-grid { grid-template-columns: 1fr; }
+  .insights-row { grid-template-columns: 1fr; }
+  .rec-insights { grid-template-columns: 1fr 1fr; }
+  .dash-layout { flex-direction: column; }
+  .sidebar { width: 100%; height: auto; position: relative; top: 0; }
+  .premium-banner { flex-direction: column; }
+  .premium-mock { width: 100%; }
+  .reg-left { display: none; }
+  #page-register.active { display: block; }
+  .profile-content { grid-template-columns: 1fr; }
+  .vl-nav-links a:not(.nav-back) { display: none; }
+  .form-row { grid-template-columns: 1fr; }
+  .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+}
+
+/* Animations */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.page.active > * { animation: fadeIn .25s ease forwards; }
+</style>
+</head>
+<body>
+
+<!-- ====== LANDING PAGE ====== -->
+<div id="page-landing" class="page active">
+
+  <nav class="vl-nav">
+    <div class="vl-logo" onclick="goTo('page-landing')">Vocalink</div>
+    <div class="vl-nav-links">
+      <a>Jelajahi</a>
+      <a>Program Studi</a>
+      <a>Perusahaan</a>
+      <a>Premium</a>
+      <button class="btn-outline" onclick="goTo('page-register')">Masuk</button>
+      <button class="btn-solid" onclick="goTo('page-register')">Daftar Gratis ↗</button>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-badge"><i class="ti ti-certificate"></i> Khusus Sarjana Terapan & Diploma</div>
+    <h1>Temukan Talenta<br><span>Vokasi Terbaik</span> Indonesia</h1>
+    <p>Platform pertama yang menghubungkan lulusan diploma & sarjana terapan dengan perusahaan yang tepat — bukan portal kerja biasa.</p>
+    <div class="hero-search">
+      <i class="ti ti-search"></i>
+      <input type="text" placeholder="Cari nama, prodi, keahlian, atau perusahaan..."/>
+      <button class="btn-solid" style="padding:9px 20px; flex-shrink:0;">Cari</button>
+    </div>
+    <div class="hero-tags">
+      <span class="hero-tag">Akuntansi Pajak</span>
+      <span class="hero-tag">Teknik Mesin</span>
+      <span class="hero-tag">Teknologi Informasi</span>
+      <span class="hero-tag">Gizi Klinik</span>
+      <span class="hero-tag">Manajemen Pariwisata</span>
+      <span class="hero-tag">Desain Grafis</span>
+    </div>
+    <div class="hero-stats">
+      <div><div class="hero-stat-num">12.4K+</div><div class="hero-stat-lbl">Lulusan Terdaftar</div></div>
+      <div><div class="hero-stat-num">340+</div><div class="hero-stat-lbl">Program Studi</div></div>
+      <div><div class="hero-stat-num">2.8K+</div><div class="hero-stat-lbl">Perusahaan Mitra</div></div>
+      <div><div class="hero-stat-num">87%</div><div class="hero-stat-lbl">Tingkat Penyerapan</div></div>
+    </div>
+  </section>
+
+  <div class="filter-bar">
+    <span class="filter-lbl">Bidang:</span>
+    <button class="chip active" onclick="setChip(this)">Semua</button>
+    <button class="chip" onclick="setChip(this)">Teknik & Manufaktur</button>
+    <button class="chip" onclick="setChip(this)">Keuangan & Akuntansi</button>
+    <button class="chip" onclick="setChip(this)">Kesehatan</button>
+    <button class="chip" onclick="setChip(this)">Teknologi Informasi</button>
+    <button class="chip" onclick="setChip(this)">Pariwisata & Hospitality</button>
+    <button class="chip" onclick="setChip(this)">Desain Kreatif</button>
+    <button class="chip" onclick="setChip(this)">Pertanian</button>
+    <button class="chip" onclick="setChip(this)">Kelautan</button>
+  </div>
+
+  <div class="main">
+
+    <div class="stats-strip">
+      <div class="stat-card"><div class="stat-icon si-blue"><i class="ti ti-users"></i></div><div><div class="stat-num">12.4K</div><div class="stat-lbl">Profil Aktif</div></div></div>
+      <div class="stat-card"><div class="stat-icon si-teal"><i class="ti ti-briefcase"></i></div><div><div class="stat-num">3.2K</div><div class="stat-lbl">Lowongan Terbuka</div></div></div>
+      <div class="stat-card"><div class="stat-icon si-navy"><i class="ti ti-school"></i></div><div><div class="stat-num">148</div><div class="stat-lbl">Politeknik & Univ</div></div></div>
+      <div class="stat-card"><div class="stat-icon si-amber"><i class="ti ti-trophy"></i></div><div><div class="stat-num">94%</div><div class="stat-lbl">Kepuasan Rekrutmen</div></div></div>
+    </div>
+
+    <div class="sec-head">
+      <div class="sec-title">Profil Unggulan</div>
+      <a class="sec-link">Lihat semua <i class="ti ti-arrow-right" style="font-size:13px"></i></a>
+    </div>
+
+    <div class="card-grid">
+
+      <div class="vl-card featured" onclick="goTo('page-profile')">
+        <div class="feat-badge">⭐ Unggulan</div>
+        <div class="card-top">
+          <div class="av av-blue">RD<div class="online-dot"></div></div>
+          <div class="card-info">
+            <div class="card-name">Rizky Dwi Putranto</div>
+            <div class="card-degree">S.Tr.T · Teknik Mesin — Polines</div>
+            <div class="card-loc"><i class="ti ti-map-pin" style="font-size:11px"></i> Semarang, Jawa Tengah</div>
+          </div>
+          <button class="connect-btn">+ Hubungi</button>
+        </div>
+        <div class="card-bio">Insinyur CNC & CAD/CAM berpengalaman 3 tahun di industri manufaktur otomotif. Spesialis toleransi presisi dan quality control komponen.</div>
+        <div class="card-tags"><span class="tag">CNC Machining</span><span class="tag">AutoCAD</span><span class="tag tag-blue">SolidWorks</span></div>
+        <div class="card-footer"><div class="card-exp"><i class="ti ti-briefcase"></i> 3 thn · PT Astra Honda Motor</div><div class="contact-icons"><a title="Email"><i class="ti ti-mail"></i></a><a title="LinkedIn"><i class="ti ti-brand-linkedin"></i></a></div></div>
+      </div>
+
+      <div class="vl-card featured" onclick="goTo('page-profile')">
+        <div class="feat-badge">⭐ Unggulan</div>
+        <div class="card-top">
+          <div class="av av-teal">DR<div class="online-dot"></div></div>
+          <div class="card-info">
+            <div class="card-name">Dinda Rahmawati Putri</div>
+            <div class="card-degree">S.Tr.Ak · Akuntansi Pajak — Unpad</div>
+            <div class="card-loc"><i class="ti ti-map-pin" style="font-size:11px"></i> Bandung, Jawa Barat</div>
+          </div>
+          <button class="connect-btn">+ Hubungi</button>
+        </div>
+        <div class="card-bio">Tax consultant dengan spesialisasi PPh Badan dan VAT reconciliation. Berpengalaman di Big4 dan konsultasi UMKM skala menengah.</div>
+        <div class="card-tags"><span class="tag">Perpajakan</span><span class="tag">PPh Badan</span><span class="tag tag-blue">SAP Finance</span></div>
+        <div class="card-footer"><div class="card-exp"><i class="ti ti-briefcase"></i> 4 thn · Deloitte Indonesia</div><div class="contact-icons"><a><i class="ti ti-mail"></i></a><a><i class="ti ti-brand-linkedin"></i></a></div></div>
+      </div>
+
+      <div class="vl-card" onclick="goTo('page-profile')">
+        <div class="card-top">
+          <div class="av av-navy">FA</div>
+          <div class="card-info">
+            <div class="card-name">Fajar Alamsyah</div>
+            <div class="card-degree">S.Tr.Kom · Teknologi Informasi — Polban</div>
+            <div class="card-loc"><i class="ti ti-map-pin" style="font-size:11px"></i> Jakarta Selatan, DKI</div>
+          </div>
+          <button class="connect-btn">+ Hubungi</button>
+        </div>
+        <div class="card-bio">Full-stack developer dengan fokus pengembangan aplikasi enterprise berbasis cloud. Berkontribusi di 8+ proyek skala nasional.</div>
+        <div class="card-tags"><span class="tag">React.js</span><span class="tag">Node.js</span><span class="tag tag-blue">AWS</span></div>
+        <div class="card-footer"><div class="card-exp"><i class="ti ti-briefcase"></i> 4 thn · Tokopedia</div><div class="contact-icons"><a><i class="ti ti-mail"></i></a><a><i class="ti ti-brand-github"></i></a></div></div>
+      </div>
+
+      <div class="vl-card" onclick="goTo('page-profile')">
+        <div class="card-top">
+          <div class="av av-indigo">MF</div>
+          <div class="card-info">
+            <div class="card-name">Maya Fitriani</div>
+            <div class="card-degree">S.Tr.Ds · Desain Grafis — ISI Yogyakarta</div>
+            <div class="card-loc"><i class="ti ti-map-pin" style="font-size:11px"></i> Surabaya, Jawa Timur</div>
+          </div>
+          <button class="connect-btn">+ Hubungi</button>
+        </div>
+        <div class="card-bio">Brand identity designer & UI/UX specialist. Telah menangani branding untuk 40+ UMKM dan startup lokal.</div>
+        <div class="card-tags"><span class="tag">Figma</span><span class="tag">Brand Identity</span><span class="tag tag-blue">UI/UX</span></div>
+        <div class="card-footer"><div class="card-exp"><i class="ti ti-briefcase"></i> 3 thn · Freelance & LOKAL Agency</div><div class="contact-icons"><a><i class="ti ti-mail"></i></a><a><i class="ti ti-brand-behance"></i></a></div></div>
+      </div>
+
+      <div class="vl-card" onclick="goTo('page-profile')">
+        <div class="card-top">
+          <div class="av av-cyan">NA</div>
+          <div class="card-info">
+            <div class="card-name">Nadya Aulia Rahmawati</div>
+            <div class="card-degree">S.Tr.Gz · Gizi Klinik — Poltekkes Bandung</div>
+            <div class="card-loc"><i class="ti ti-map-pin" style="font-size:11px"></i> Bandung, Jawa Barat</div>
+          </div>
+          <button class="connect-btn">+ Hubungi</button>
+        </div>
+        <div class="card-bio">Ahli gizi klinis dengan keahlian diet terapeutik dan konseling nutrisi. Berpengalaman di RS rujukan nasional selama 2 tahun.</div>
+        <div class="card-tags"><span class="tag">Diet Klinis</span><span class="tag">Konseling Gizi</span><span class="tag tag-blue">NCP</span></div>
+        <div class="card-footer"><div class="card-exp"><i class="ti ti-briefcase"></i> 2 thn · RSUP Hasan Sadikin</div><div class="contact-icons"><a><i class="ti ti-mail"></i></a><a><i class="ti ti-brand-whatsapp"></i></a></div></div>
+      </div>
+
+      <div class="vl-card" onclick="goTo('page-profile')">
+        <div class="card-top">
+          <div class="av av-emerald">BP</div>
+          <div class="card-info">
+            <div class="card-name">Bagas Pratama</div>
+            <div class="card-degree">S.Tr.P · Agribisnis — Poltek Pertanian</div>
+            <div class="card-loc"><i class="ti ti-map-pin" style="font-size:11px"></i> Yogyakarta, DIY</div>
+          </div>
+          <button class="connect-btn">+ Hubungi</button>
+        </div>
+        <div class="card-bio">Agroprenuer muda dengan usaha smart farming berbasis IoT seluas 12 hektar. Juara Agripreneur Award Kementan 2023.</div>
+        <div class="card-tags"><span class="tag">Smart Farming</span><span class="tag tag-blue">IoT Pertanian</span><span class="tag">Supply Chain</span></div>
+        <div class="card-footer"><div class="card-exp"><i class="ti ti-briefcase"></i> 3 thn · GreenAgri.id</div><div class="contact-icons"><a><i class="ti ti-mail"></i></a><a><i class="ti ti-brand-instagram"></i></a></div></div>
+      </div>
+
+    </div>
+
+    <!-- How it works -->
+    <div class="how-section">
+      <div class="sec-head" style="margin-bottom:.25rem">
+        <div class="sec-title">Bagaimana Cara Kerjanya?</div>
+      </div>
+      <p style="font-size:13px;color:var(--gray-500);margin-bottom:1.5rem">Vocalink dirancang untuk dua kebutuhan yang saling terhubung.</p>
+      <div class="how-grid">
+        <div class="how-col">
+          <div class="how-col-title">
+            <i class="ti ti-user-check" style="color:var(--teal-dark);font-size:18px"></i>
+            Untuk Lulusan Vokasi
+            <span class="badge badge-lulusan">Promosi Diri</span>
+          </div>
+          <div class="how-step"><div class="how-num num-teal">1</div><div><div class="how-step-title">Buat Profil Profesional</div><div class="how-step-desc">Lengkapi data diri, program studi, dan tambahkan email aktif yang bisa dihubungi rekruiter secara langsung.</div></div></div>
+          <div class="how-step"><div class="how-num num-teal">2</div><div><div class="how-step-title">Unggah Portofolio & Sertifikat</div><div class="how-step-desc">Tampilkan karya terbaik dan pencapaian sertifikasi untuk membangun personal branding yang kuat.</div></div></div>
+          <div class="how-step"><div class="how-num num-teal">3</div><div><div class="how-step-title">Aktifkan Fitur Premium (Opsional)</div><div class="how-step-desc">Profil ditampilkan di posisi highlight dashboard sehingga lebih mudah ditemukan oleh pencari pekerja.</div></div></div>
+        </div>
+        <div class="how-col">
+          <div class="how-col-title">
+            <i class="ti ti-building" style="color:var(--blue-dark);font-size:18px"></i>
+            Untuk Pencari Pekerja
+            <span class="badge badge-recruiter">Rekrutmen</span>
+          </div>
+          <div class="how-step"><div class="how-num num-blue">1</div><div><div class="how-step-title">Buat Akun Perusahaan</div><div class="how-step-desc">Isi profil perusahaan, bidang industri, dan kategori proyek yang sering ditangani untuk kustomisasi dashboard.</div></div></div>
+          <div class="how-step"><div class="how-num num-blue">2</div><div><div class="how-step-title">Gunakan Pencarian Cerdas</div><div class="how-step-desc">Cari lulusan berdasarkan bidang, keahlian spesifik, lokasi, atau nama program studi yang relevan.</div></div></div>
+          <div class="how-step"><div class="how-num num-blue">3</div><div><div class="how-step-title">Dapatkan Insight Personal</div><div class="how-step-desc">Dashboard otomatis menampilkan rekomendasi lulusan yang sesuai dengan profil industri perusahaan Anda.</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Prodi Grid -->
+    <div style="margin-bottom:2.5rem">
+      <div class="sec-head">
+        <div class="sec-title">Jelajahi per Program Studi</div>
+        <a class="sec-link">Semua prodi <i class="ti ti-arrow-right" style="font-size:13px"></i></a>
+      </div>
+      <div class="prodi-grid">
+        <div class="prodi-card"><i class="ti ti-engine"></i><div class="prodi-name">Teknik Mesin</div><div class="prodi-count">1.240 profil</div></div>
+        <div class="prodi-card"><i class="ti ti-device-laptop"></i><div class="prodi-name">Teknologi Informasi</div><div class="prodi-count">2.180 profil</div></div>
+        <div class="prodi-card"><i class="ti ti-calculator"></i><div class="prodi-name">Akuntansi Pajak</div><div class="prodi-count">1.050 profil</div></div>
+        <div class="prodi-card"><i class="ti ti-stethoscope"></i><div class="prodi-name">Gizi & Kesehatan</div><div class="prodi-count">890 profil</div></div>
+        <div class="prodi-card"><i class="ti ti-building-hotel"></i><div class="prodi-name">Pariwisata</div><div class="prodi-count">740 profil</div></div>
+        <div class="prodi-card"><i class="ti ti-palette"></i><div class="prodi-name">Desain Kreatif</div><div class="prodi-count">560 profil</div></div>
+        <div class="prodi-card"><i class="ti ti-ship"></i><div class="prodi-name">Kelautan</div><div class="prodi-count">320 profil</div></div>
+        <div class="prodi-card"><i class="ti ti-plant"></i><div class="prodi-name">Pertanian</div><div class="prodi-count">480 profil</div></div>
+      </div>
+    </div>
+
+    <!-- Premium banner -->
+    <div class="premium-banner">
+      <div class="premium-text">
+        <div class="premium-eyebrow"><i class="ti ti-star"></i> Premium Membership</div>
+        <h3>Tampil di Posisi Terbaik.<br>Ditemukan Lebih Cepat.</h3>
+        <p>Profil premium mendapatkan highlight khusus di dashboard pencari pekerja, menempatkan Anda di bagian paling terlihat secara otomatis.</p>
+        <div class="premium-perks">
+          <div class="perk"><i class="ti ti-star-filled"></i> Highlight di dashboard utama</div>
+          <div class="perk"><i class="ti ti-chart-bar"></i> Analitik tampilan profil</div>
+          <div class="perk"><i class="ti ti-badge"></i> Badge Verified Premium</div>
+          <div class="perk"><i class="ti ti-mail-opened"></i> Prioritas muncul di pencarian</div>
+        </div>
+        <button class="btn-premium" onclick="showToast('Fitur Premium segera tersedia!')">Coba Premium Sekarang ↗</button>
+      </div>
+      <div class="premium-mock">
+        <div style="position:relative">
+          <div class="premium-card-mock">
+            <div class="pm-header">
+              <div class="pm-star">⭐</div>
+              <div><div class="pm-name">Dinda Rahmawati</div><div class="pm-role">S.Tr.Ak · Akuntansi Pajak</div></div>
+            </div>
+            <div class="pm-bar"></div>
+            <div class="pm-tags"><span class="pm-tag">Perpajakan</span><span class="pm-tag">PPh Badan</span><span class="pm-tag">SAP</span></div>
+          </div>
+          <div class="highlight-ring"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-section">
+      <h2>Siap Bergabung dengan<br><span>Komunitas Vokasi Indonesia?</span></h2>
+      <p>Buat profil profesionalmu dan terhubung dengan ribuan peluang karier yang menghargai keahlian terapanmu.</p>
+      <div class="cta-btns">
+        <button class="btn-solid btn-lg" onclick="goTo('page-register')">Daftar Sebagai Lulusan ↗</button>
+        <button class="btn-outline btn-lg" style="border-color:rgba(255,255,255,.3);color:rgba(255,255,255,.8)" onclick="goTo('page-register')">Saya Perusahaan</button>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="vl-footer">
+    <div class="footer-logo">Vocalink</div>
+    <p>Platform Profesional Sarjana Terapan & Vokasi Indonesia · 2025</p>
+  </footer>
+
+</div><!-- /page-landing -->
+
+
+<!-- ====== REGISTER PAGE ====== -->
+<div id="page-register" class="page">
+
+  <div class="reg-left">
+    <div class="reg-logo" onclick="goBack()" style="cursor:pointer"><i class="ti ti-arrow-left" style="font-size:14px;margin-right:6px;vertical-align:middle"></i>Vocalink</div>
+    <h2 class="reg-heading">Satu Platform<br>untuk <span>Semua Talenta</span><br>Vokasi</h2>
+    <p class="reg-sub">Bergabunglah bersama 12.400+ lulusan diploma dan sarjana terapan yang sudah membangun karier melalui Vocalink.</p>
+    <div class="reg-features">
+      <div class="reg-feat"><div class="reg-feat-icon rfi-teal"><i class="ti ti-user-plus"></i></div><div class="reg-feat-text"><strong>Profil Profesional Lengkap</strong>Portofolio, sertifikat, dan info kontak dalam satu halaman.</div></div>
+      <div class="reg-feat"><div class="reg-feat-icon rfi-blue"><i class="ti ti-search"></i></div><div class="reg-feat-text"><strong>Pencarian Cerdas Bidang Vokasi</strong>Ditemukan oleh perusahaan yang mencari keahlian spesifikmu.</div></div>
+      <div class="reg-feat"><div class="reg-feat-icon rfi-amber"><i class="ti ti-star"></i></div><div class="reg-feat-text"><strong>Fitur Premium Highlight</strong>Tampil di posisi terbaik di dashboard rekruiter.</div></div>
+    </div>
+  </div>
+
+  <div class="reg-right">
+    <div class="reg-form-wrap">
+
+      <!-- Step 1: Pilih Role -->
+      <div id="reg-step1">
+        <div class="form-title">Daftar ke Vocalink</div>
+        <div class="form-sub">Pilih jenis akun yang sesuai dengan tujuanmu</div>
+
+        <div class="role-selector">
+          <div class="role-card selected" id="role-lul" onclick="selectRole('lul')">
+            <div class="role-icon ri-teal"><i class="ti ti-user-check"></i></div>
+            <div class="role-label">Lulusan Vokasi</div>
+            <div class="role-desc">Ingin mempromosikan diri & membangun personal branding</div>
+          </div>
+          <div class="role-card" id="role-rec" onclick="selectRole('rec')">
+            <div class="role-icon ri-blue"><i class="ti ti-building"></i></div>
+            <div class="role-label">Pencari Pekerja</div>
+            <div class="role-desc">Ingin mencari & merekrut lulusan vokasi yang tepat</div>
+          </div>
+        </div>
+
+        <!-- Form Lulusan -->
+        <div class="lul-fields show" id="lul-fields">
+          <div class="form-row">
+            <div class="form-group"><label class="form-label">Nama Depan</label><input class="form-input" type="text" placeholder="Budi"/></div>
+            <div class="form-group"><label class="form-label">Nama Belakang</label><input class="form-input" type="text" placeholder="Santoso"/></div>
+          </div>
+          <div class="form-group"><label class="form-label">Email Aktif <span style="color:var(--rose)">*</span></label><input class="form-input" type="email" placeholder="nama@email.com"/><div class="form-hint">Email ini akan bisa dihubungi langsung oleh rekruiter</div></div>
+          <div class="form-group"><label class="form-label">Program Studi</label>
+            <select class="form-input">
+              <option value="">Pilih program studi...</option>
+              <option>Akuntansi Pajak</option><option>Teknik Mesin</option><option>Teknologi Informasi</option>
+              <option>Gizi Klinik</option><option>Manajemen Pariwisata</option><option>Desain Grafis</option>
+              <option>Agribisnis</option><option>Kelautan & Perikanan</option><option>Lainnya...</option>
+            </select>
+          </div>
+          <div class="form-group"><label class="form-label">Perguruan Tinggi</label><input class="form-input" type="text" placeholder="Politeknik Negeri Bandung"/></div>
+          <div class="form-row">
+            <div class="form-group"><label class="form-label">Gelar</label>
+              <select class="form-input"><option>D-3 (A.Md)</option><option>D-4 / S.Tr</option></select>
+            </div>
+            <div class="form-group"><label class="form-label">Tahun Lulus</label><input class="form-input" type="text" placeholder="2023"/></div>
+          </div>
+          <div class="form-group"><label class="form-label">Password</label><input class="form-input" type="password" placeholder="Min. 8 karakter"/></div>
+          <button class="btn-solid btn-full" onclick="goTo('page-dashboard-lul')">Buat Profil Saya ↗</button>
+          <div class="form-divider"><span>atau masuk dengan</span></div>
+          <button class="btn-outline btn-full" style="display:flex;align-items:center;justify-content:center;gap:8px;padding:11px"><i class="ti ti-brand-google"></i> Lanjutkan dengan Google</button>
+        </div>
+
+        <!-- Form Recruiter -->
+        <div class="rec-fields" id="rec-fields">
+          <div class="form-group"><label class="form-label">Nama PIC / HR</label><input class="form-input" type="text" placeholder="Nama lengkap"/></div>
+          <div class="form-group"><label class="form-label">Email Perusahaan <span style="color:var(--rose)">*</span></label><input class="form-input" type="email" placeholder="hr@perusahaan.com"/></div>
+          <div class="form-group"><label class="form-label">Nama Perusahaan</label><input class="form-input" type="text" placeholder="PT Maju Bersama"/></div>
+          <div class="form-group"><label class="form-label">Bidang Industri</label>
+            <select class="form-input">
+              <option value="">Pilih bidang industri...</option>
+              <option>Manufaktur & Industri</option><option>Keuangan & Perbankan</option>
+              <option>Teknologi & Startup</option><option>Kesehatan & Farmasi</option>
+              <option>Hospitality & Pariwisata</option><option>Pertanian & Agribisnis</option><option>Lainnya</option>
+            </select>
+          </div>
+          <div class="form-group"><label class="form-label">Skala Perusahaan</label>
+            <select class="form-input">
+              <option>Startup (1–50 karyawan)</option><option>Menengah (50–500 karyawan)</option>
+              <option>Besar (500+ karyawan)</option><option>BUMN / Instansi Pemerintah</option>
+            </select>
+          </div>
+          <div class="form-group"><label class="form-label">Kategori Proyek yang Sering Ditangani</label><input class="form-input" type="text" placeholder="Contoh: proyek EPC, konsultasi pajak, pengembangan produk..."/><div class="form-hint">Ini membantu sistem memberikan rekomendasi lulusan yang relevan</div></div>
+          <div class="form-group"><label class="form-label">Password</label><input class="form-input" type="password" placeholder="Min. 8 karakter"/></div>
+          <button class="btn-solid btn-full" onclick="goTo('page-dashboard-rec')">Buat Akun Perusahaan ↗</button>
+        </div>
+
+        <div class="form-footer">
+          Sudah punya akun? <a onclick="goTo('page-landing')">Masuk di sini</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- /page-register -->
+
+
+<!-- ====== DASHBOARD LULUSAN ====== -->
+<div id="page-dashboard-lul" class="page">
+
+  <nav class="vl-nav">
+    <div class="vl-logo" onclick="goTo('page-landing')" style="cursor:pointer" title="Kembali ke beranda">Vocalink</div>
+    <div class="vl-nav-links">
+      <a onclick="goBack()" style="cursor:pointer"><i class="ti ti-arrow-left" style="font-size:13px"></i> Kembali</a>
+      <a class="active" style="color:var(--blue)">Dashboard</a>
+      <a>Portofolio</a>
+      <a>Sertifikat</a>
+      <a>Profil Saya</a>
+      <button class="btn-premium" onclick="showToast('Upgrade ke Premium aktif!')">⭐ Premium</button>
+      <div class="av av-sm av-teal" style="cursor:pointer" onclick="goTo('page-profile')">DR</div>
+    </div>
+  </nav>
+
+  <div class="dash-layout">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-item active"><i class="ti ti-home"></i><span>Dashboard</span></div>
+      <div class="sidebar-item"><i class="ti ti-user"></i><span>Profil Saya</span></div>
+      <div class="sidebar-item"><i class="ti ti-folder"></i><span>Portofolio</span></div>
+      <div class="sidebar-item"><i class="ti ti-certificate"></i><span>Sertifikat</span></div>
+      <div class="sidebar-item"><i class="ti ti-mail"></i><span>Pesan Masuk</span><span class="sidebar-badge">3</span></div>
+      <div class="sidebar-section-title">Analitik</div>
+      <div class="sidebar-item"><i class="ti ti-chart-line"></i><span>Tampilan Profil</span></div>
+      <div class="sidebar-item"><i class="ti ti-eye"></i><span>Siapa Melihat Saya</span></div>
+      <div class="sidebar-section-title">Pengaturan</div>
+      <div class="sidebar-item"><i class="ti ti-settings"></i><span>Akun</span></div>
+      <div class="sidebar-item"><i class="ti ti-lock"></i><span>Privasi</span></div>
+      <div class="sidebar-premium">
+        <div class="sp-title">⭐ Upgrade Premium</div>
+        <div class="sp-desc">Tampil di posisi highlight dan dapatkan analitik lengkap profil kamu.</div>
+        <button class="btn-premium" style="width:100%;padding:8px" onclick="showToast('Fitur Premium segera tersedia!')">Lihat Paket</button>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="dash-content">
+
+      <div class="dash-header">
+        <div>
+          <div class="dash-greeting">👋 Selamat datang, Dinda!</div>
+          <div class="dash-sub">Profil kamu sudah dilihat 127 kali minggu ini. Terus lengkapi profilmu.</div>
+        </div>
+        <button class="btn-solid" onclick="goTo('page-profile')"><i class="ti ti-external-link" style="font-size:13px"></i> Lihat Profil Publik</button>
+      </div>
+
+      <!-- Profile completion -->
+      <div class="profile-complete">
+        <div style="width:52px;height:52px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;flex-shrink:0">72%</div>
+        <div class="pc-bar-wrap">
+          <div class="pc-label"><span>Kelengkapan Profil</span><span style="color:var(--blue)">72%</span></div>
+          <div class="pc-bar"><div class="pc-fill" style="width:72%"></div></div>
+          <div class="pc-hint">Tambahkan <strong>2 portofolio</strong> dan <strong>1 sertifikat</strong> untuk mencapai profil lengkap dan tampil lebih tinggi di pencarian.</div>
+        </div>
+        <button class="btn-outline" onclick="showToast('Buka halaman edit profil')">Lengkapi</button>
+      </div>
+
+      <!-- Insights -->
+      <div class="insights-row">
+        <div class="insight-card"><div class="ic-icon si-blue"><i class="ti ti-eye"></i></div><div><div class="ic-num">127</div><div class="ic-lbl">Profil dilihat</div><div class="ic-trend trend-up">↑ 34% minggu ini</div></div></div>
+        <div class="insight-card"><div class="ic-icon si-teal"><i class="ti ti-mail"></i></div><div><div class="ic-num">3</div><div class="ic-lbl">Pesan masuk</div><div class="ic-trend trend-up">2 belum dibaca</div></div></div>
+        <div class="insight-card"><div class="ic-icon si-amber"><i class="ti ti-search"></i></div><div><div class="ic-num">48</div><div class="ic-lbl">Muncul di pencarian</div><div class="ic-trend trend-up">↑ 12% dari bulan lalu</div></div></div>
+      </div>
+
+      <!-- Portofolio -->
+      <div style="margin-bottom:1.75rem">
+        <div class="sec-head">
+          <div class="sec-title">Portofolio Saya</div>
+          <a class="sec-link">Kelola semua <i class="ti ti-arrow-right" style="font-size:13px"></i></a>
+        </div>
+        <div class="portfolio-grid">
+          <div class="porto-card">
+            <div class="porto-thumb pt-teal">📊</div>
+            <div class="porto-body"><div class="porto-title">Analisis Pajak PPh Badan 2023</div><div class="porto-desc">Rekonsiliasi fiskal & laporan SPT PT. Mitra Jaya</div></div>
+          </div>
+          <div class="porto-card">
+            <div class="porto-thumb pt-blue">📑</div>
+            <div class="porto-body"><div class="porto-title">Tax Planning UMKM Semester I</div><div class="porto-desc">Strategi efisiensi pajak untuk klien skala menengah</div></div>
+          </div>
+          <div class="porto-card">
+            <div class="porto-thumb pt-amber">📋</div>
+            <div class="porto-body"><div class="porto-title">Audit VAT Reconciliation</div><div class="porto-desc">Pemeriksaan PPN untuk 3 perusahaan manufaktur</div></div>
+          </div>
+          <button class="porto-add" onclick="showToast('Tambah portofolio baru')"><i class="ti ti-plus"></i><span>Tambah Portofolio</span></button>
+        </div>
+      </div>
+
+      <!-- Sertifikat -->
+      <div>
+        <div class="sec-head">
+          <div class="sec-title">Sertifikat</div>
+          <a class="sec-link">+ Tambah <i class="ti ti-arrow-right" style="font-size:13px"></i></a>
+        </div>
+        <div class="cert-list">
+          <div class="cert-item"><div class="cert-icon"><i class="ti ti-certificate"></i></div><div style="flex:1"><div class="cert-name">Brevet Pajak A & B</div><div class="cert-issuer">Ikatan Konsultan Pajak Indonesia (IKPI)</div></div><div><span class="cert-badge cert-valid"><i class="ti ti-circle-check" style="font-size:11px"></i> Berlaku</span><div class="cert-date" style="margin-top:4px">Mei 2024</div></div></div>
+          <div class="cert-item"><div class="cert-icon"><i class="ti ti-certificate"></i></div><div style="flex:1"><div class="cert-name">SAP Financial Accounting S/4HANA</div><div class="cert-issuer">SAP SE Official Certification</div></div><div><span class="cert-badge cert-valid"><i class="ti ti-circle-check" style="font-size:11px"></i> Berlaku</span><div class="cert-date" style="margin-top:4px">Jan 2024</div></div></div>
+          <div class="cert-item"><div class="cert-icon"><i class="ti ti-certificate"></i></div><div style="flex:1"><div class="cert-name">Certified Public Accountant — Foundation</div><div class="cert-issuer">Institut Akuntan Publik Indonesia</div></div><div><span class="cert-badge cert-valid"><i class="ti ti-circle-check" style="font-size:11px"></i> Berlaku</span><div class="cert-date" style="margin-top:4px">Aug 2023</div></div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- /page-dashboard-lul -->
+
+
+<!-- ====== DASHBOARD RECRUITER ====== -->
+<div id="page-dashboard-rec" class="page">
+
+  <nav class="vl-nav">
+    <div class="vl-logo" onclick="goTo('page-landing')" style="cursor:pointer" title="Kembali ke beranda">Vocalink</div>
+    <div class="vl-nav-links">
+      <a onclick="goBack()" style="cursor:pointer"><i class="ti ti-arrow-left" style="font-size:13px"></i> Kembali</a>
+      <a style="color:var(--blue)">Dashboard</a>
+      <a>Pencarian</a>
+      <a>Tersimpan</a>
+      <a>Pesan</a>
+      <div class="company-logo" style="width:32px;height:32px;border-radius:8px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:#fff;cursor:pointer">PT</div>
+    </div>
+  </nav>
+
+  <div class="dash-layout">
+
+    <!-- Sidebar Recruiter -->
+    <div class="sidebar">
+      <div class="company-card">
+        <div class="company-card-head">
+          <div class="company-logo" style="width:40px;height:40px;border-radius:10px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#fff">PT</div>
+          <div><div class="company-name">PT Teknindo Makmur</div><div class="company-type">Manufaktur & Industri</div></div>
+        </div>
+        <div class="company-detail"><i class="ti ti-users"></i> 250–500 karyawan</div>
+        <div class="company-detail"><i class="ti ti-map-pin"></i> Jakarta Barat, DKI</div>
+        <div class="company-detail"><i class="ti ti-briefcase"></i> Proyek EPC & OEM</div>
+      </div>
+      <div class="sidebar-item active"><i class="ti ti-home"></i><span>Dashboard</span></div>
+      <div class="sidebar-item"><i class="ti ti-search"></i><span>Cari Talenta</span></div>
+      <div class="sidebar-item"><i class="ti ti-bookmarks"></i><span>Kandidat Tersimpan</span><span class="sidebar-badge">8</span></div>
+      <div class="sidebar-item"><i class="ti ti-mail"></i><span>Pesan Terkirim</span></div>
+      <div class="sidebar-section-title">Insight</div>
+      <div class="sidebar-item"><i class="ti ti-chart-pie"></i><span>Analitik Rekrutmen</span></div>
+      <div class="sidebar-item"><i class="ti ti-bulb"></i><span>Rekomendasi Sistem</span></div>
+      <div class="sidebar-section-title">Akun</div>
+      <div class="sidebar-item"><i class="ti ti-building"></i><span>Profil Perusahaan</span></div>
+      <div class="sidebar-item"><i class="ti ti-settings"></i><span>Pengaturan</span></div>
+    </div>
+
+    <!-- Recruiter content -->
+    <div class="dash-content">
+
+      <div class="dash-header">
+        <div>
+          <div class="dash-greeting">Dashboard Rekrutmen</div>
+          <div class="dash-sub">PT Teknindo Makmur · Bidang: Manufaktur & EPC · Diperbarui hari ini</div>
+        </div>
+        <button class="btn-solid" onclick="showToast('Buka halaman pencarian talenta')"><i class="ti ti-search" style="font-size:13px"></i> Cari Talenta Sekarang</button>
+      </div>
+
+      <!-- Recruiter insights -->
+      <div class="rec-insights">
+        <div class="ri-card"><div class="ri-lbl">Kandidat Dilihat</div><div class="ri-val">341</div><div class="ri-sub">Total profil dikunjungi</div></div>
+        <div class="ri-card"><div class="ri-lbl">Tersimpan</div><div class="ri-val">8</div><div class="ri-sub">Kandidat shortlist</div></div>
+        <div class="ri-card"><div class="ri-lbl">Pesan Terkirim</div><div class="ri-val">14</div><div class="ri-sub">Kontak aktif</div></div>
+        <div class="ri-card"><div class="ri-lbl">Balasan</div><div class="ri-val">71%</div><div class="ri-sub">Tingkat respons</div></div>
+      </div>
+
+      <!-- Recommendation banner -->
+      <div class="rec-rec-banner">
+        <div class="rrb-icon"><i class="ti ti-robot"></i></div>
+        <div class="rrb-text">
+          <div class="rrb-title">Rekomendasi Sistem untuk PT Teknindo Makmur</div>
+          <div class="rrb-desc">Berdasarkan profil industri manufaktur EPC, sistem menemukan 47 lulusan baru di bidang Teknik Mesin, Teknik Elektro, dan Teknik Industri yang cocok untuk proyekmu.</div>
+        </div>
+        <button class="btn-solid" style="flex-shrink:0;white-space:nowrap" onclick="showToast('Menampilkan 47 kandidat rekomendasi...')">Lihat Semua</button>
+      </div>
+
+      <!-- Search panel -->
+      <div class="search-panel">
+        <div class="search-panel-header">
+          <div class="sec-title" style="font-size:15px">Pencarian Lulusan</div>
+          <a class="sec-link" style="font-size:12px">Pencarian Lanjutan <i class="ti ti-sliders" style="font-size:12px"></i></a>
+        </div>
+        <div class="advanced-search">
+          <i class="ti ti-search"></i>
+          <input type="text" placeholder="Cari berdasarkan prodi, keahlian, nama, atau kota..." value="Teknik Mesin"/>
+          <button class="btn-solid" style="padding:7px 16px;font-size:13px">Cari</button>
+        </div>
+        <div class="filter-chips-wrap">
+          <button class="filter-chip on"><i class="ti ti-engine"></i> Teknik Mesin</button>
+          <button class="filter-chip"><i class="ti ti-bolt"></i> Teknik Elektro</button>
+          <button class="filter-chip"><i class="ti ti-atom"></i> Teknik Industri</button>
+          <button class="filter-chip"><i class="ti ti-map-pin"></i> Jawa Tengah</button>
+          <button class="filter-chip"><i class="ti ti-map-pin"></i> Jawa Barat</button>
+          <button class="filter-chip on"><i class="ti ti-school"></i> D-4 / S.Tr</button>
+          <button class="filter-chip"><i class="ti ti-star"></i> Premium saja</button>
+        </div>
+      </div>
+
+      <!-- Candidate results -->
+      <div class="sec-head">
+        <div class="sec-title">Hasil Pencarian <span style="font-size:13px;font-weight:500;color:var(--gray-500)">(234 lulusan ditemukan)</span></div>
+        <a class="sec-link">Urutkan: Relevansi <i class="ti ti-chevron-down" style="font-size:12px"></i></a>
+      </div>
+
+      <div class="card-grid">
+
+        <div class="vl-card featured" onclick="goTo('page-profile')">
+          <div class="feat-badge">⭐ Premium</div>
+          <div class="card-top">
+            <div class="av av-blue">RD<div class="online-dot"></div></div>
+            <div class="card-info">
+              <div class="card-name">Rizky Dwi Putranto</div>
+              <div class="card-degree">S.Tr.T · Teknik Mesin — Polines</div>
+              <div class="card-loc"><i class="ti ti-map-pin" style="font-size:11px"></i> Semarang, Jawa Tengah</div>
+            </div>
+            <button class="connect-btn" onclick="event.stopPropagation();showToast('Pesan dikirim ke Rizky!')">Hubungi</button>
+          </div>
+          <div class="card-bio">Insinyur CNC & CAD/CAM berpengalaman 3 tahun di industri manufaktur otomotif.</div>
+          <div class="card-tags"><span class="tag">CNC Machining</span><span class="tag">AutoCAD</span><span class="tag tag-blue">SolidWorks</span></div>
+          <div class="card-footer">
+            <div class="match-score"><div class="score-bar"><div class="score-fill score-high" style="width:92%"></div></div><span class="match-num">92% cocok</span></div>
+            <div class="contact-icons"><a title="Simpan"><i class="ti ti-bookmark"></i></a><a title="Email"><i class="ti ti-mail"></i></a></div>
+          </div>
+        </div>
+
+        <div class="vl-card" onclick="goTo('page-profile')">
+          <div class="card-top">
+            <div class="av av-navy">AP</div>
+            <div class="card-info">
+              <div class="card-name">Andi Permana</div>
+              <div class="card-degree">S.Tr.T · Teknik Mesin — Polban</div>
+              <div class="card-loc"><i class="ti ti-map-pin" style="font-size:11px"></i> Bandung, Jawa Barat</div>
+            </div>
+            <button class="connect-btn" onclick="event.stopPropagation();showToast('Pesan dikirim ke Andi!')">Hubungi</button>
+          </div>
+          <div class="card-bio">Spesialis quality control welding & NDT. Berpengalaman di proyek konstruksi kilang migas.</div>
+          <div class="card-tags"><span class="tag">NDT Testing</span><span class="tag">Welding QC</span><span class="tag tag-blue">ASME Standard</span></div>
+          <div class="card-footer">
+            <div class="match-score"><div class="score-bar"><div class="score-fill score-high" style="width:85%"></div></div><span class="match-num">85% cocok</span></div>
+            <div class="contact-icons"><a><i class="ti ti-bookmark"></i></a><a><i class="ti ti-mail"></i></a></div>
+          </div>
+        </div>
+
+        <div class="vl-card" onclick="goTo('page-profile')">
+          <div class="card-top">
+            <div class="av av-emerald">HR</div>
+            <div class="card-info">
+              <div class="card-name">Hendra Ramadhan</div>
+              <div class="card-degree">S.Tr.T · Teknik Industri — Polines</div>
+              <div class="card-loc"><i class="ti ti-map-pin" style="font-size:11px"></i> Semarang, Jawa Tengah</div>
+            </div>
+            <button class="connect-btn" onclick="event.stopPropagation();showToast('Pesan dikirim ke Hendra!')">Hubungi</button>
+          </div>
+          <div class="card-bio">Industrial engineer dengan spesialisasi lean manufacturing & six sigma. Berhasil menurunkan cycle time 18% di lini produksi.</div>
+          <div class="card-tags"><span class="tag">Lean Manufacturing</span><span class="tag tag-blue">Six Sigma</span><span class="tag">KAIZEN</span></div>
+          <div class="card-footer">
+            <div class="match-score"><div class="score-bar"><div class="score-fill score-med" style="width:78%"></div></div><span class="match-num">78% cocok</span></div>
+            <div class="contact-icons"><a><i class="ti ti-bookmark"></i></a><a><i class="ti ti-mail"></i></a></div>
+          </div>
+        </div>
+
+        <div class="vl-card" onclick="goTo('page-profile')">
+          <div class="card-top">
+            <div class="av av-rose">LW</div>
+            <div class="card-info">
+              <div class="card-name">Lestari Wulandari</div>
+              <div class="card-degree">S.Tr.T · Teknik Elektro — PENS</div>
+              <div class="card-loc"><i class="ti ti-map-pin" style="font-size:11px"></i> Surabaya, Jawa Timur</div>
+            </div>
+            <button class="connect-btn" onclick="event.stopPropagation();showToast('Pesan dikirim ke Lestari!')">Hubungi</button>
+          </div>
+          <div class="card-bio">Electrical maintenance engineer dengan keahlian PLC & SCADA. Berpengalaman di pabrik otomotif Tier-1.</div>
+          <div class="card-tags"><span class="tag">PLC Siemens</span><span class="tag tag-blue">SCADA</span><span class="tag">Maintenance</span></div>
+          <div class="card-footer">
+            <div class="match-score"><div class="score-bar"><div class="score-fill score-med" style="width:74%"></div></div><span class="match-num">74% cocok</span></div>
+            <div class="contact-icons"><a><i class="ti ti-bookmark"></i></a><a><i class="ti ti-mail"></i></a></div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- /page-dashboard-rec -->
+
+
+<!-- ====== PROFILE DETAIL ====== -->
+<div id="page-profile" class="page">
+
+  <nav class="vl-nav">
+    <div class="vl-logo" onclick="goTo('page-landing')">Vocalink</div>
+    <div class="vl-nav-links">
+      <a onclick="goBack()" style="cursor:pointer"><i class="ti ti-arrow-left" style="font-size:13px"></i> Kembali</a>
+      <button class="btn-outline" onclick="showToast('Link profil disalin!')"><i class="ti ti-share" style="font-size:13px"></i> Bagikan</button>
+    </div>
+  </nav>
+
+  <div class="profile-hero">
+    <div class="profile-hero-inner">
+      <div class="profile-av-wrap">
+        <div class="av av-xl av-teal">DR</div>
+        <div class="profile-premium-ring"></div>
+      </div>
+      <div class="profile-info">
+        <div class="profile-name">Dinda Rahmawati Putri</div>
+        <div class="profile-degree">S.Tr.Ak · Akuntansi Pajak — Sekolah Vokasi Universitas Padjadjaran</div>
+        <div class="profile-loc"><i class="ti ti-map-pin" style="font-size:12px"></i> Bandung, Jawa Barat</div>
+        <div class="profile-bio">Tax consultant berpengalaman 4 tahun dengan spesialisasi PPh Badan, rekonsiliasi fiskal, dan konsultasi pajak UMKM. Lulusan D-4 Akuntansi Pajak dengan track record di Deloitte Indonesia dan klien korporat.</div>
+        <div class="profile-actions">
+          <button class="btn-solid" onclick="showToast('Email: dinda@email.com — Pesan terkirim!')"><i class="ti ti-mail" style="font-size:13px"></i> Hubungi via Email</button>
+          <button class="btn-outline" style="border-color:rgba(255,255,255,.35);color:rgba(255,255,255,.8)"><i class="ti ti-brand-whatsapp" style="font-size:13px"></i> WhatsApp</button>
+          <button class="btn-outline" style="border-color:rgba(255,255,255,.35);color:rgba(255,255,255,.8)" onclick="showToast('Profil disimpan ke daftar kandidat!')"><i class="ti ti-bookmark" style="font-size:13px"></i> Simpan</button>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;flex-shrink:0">
+        <div style="background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);border-radius:8px;padding:10px 14px;text-align:center">
+          <div style="font-size:10px;color:var(--amber);font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px">⭐ Premium</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.6)">Profil terverifikasi</div>
+        </div>
+        <div style="background:rgba(77,217,172,.1);border:1px solid rgba(77,217,172,.2);border-radius:8px;padding:10px 14px;text-align:center">
+          <div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:var(--teal)">127</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.5)">kunjungan minggu ini</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="profile-content">
+    <div class="profile-main">
+
+      <div class="profile-section">
+        <div class="ps-title"><i class="ti ti-briefcase"></i> Pengalaman Kerja</div>
+        <div class="exp-item">
+          <div class="exp-dot"></div>
+          <div>
+            <div class="exp-title">Tax Consultant Associate</div>
+            <div class="exp-company">Deloitte Indonesia · Bandung</div>
+            <div class="exp-period">Jan 2022 – Sekarang · 2 thn 6 bln</div>
+            <div class="exp-desc">Menangani rekonsiliasi fiskal dan pelaporan SPT Tahunan Badan untuk 12 klien korporat. Spesialisasi PPh Pasal 21, 23, dan VAT reconciliation. Memimpin tim 3 junior consultant.</div>
+          </div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-dot"></div>
+          <div>
+            <div class="exp-title">Junior Tax Analyst</div>
+            <div class="exp-company">Konsultan Pajak Mitra Sejati · Bandung</div>
+            <div class="exp-period">Jul 2021 – Des 2021 · 6 bln</div>
+            <div class="exp-desc">Membantu klien UMKM dalam pelaporan pajak bulanan dan konsultasi penghematan pajak yang legal.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-section">
+        <div class="ps-title"><i class="ti ti-folder"></i> Portofolio</div>
+        <div class="portfolio-grid">
+          <div class="porto-card"><div class="porto-thumb pt-teal">📊</div><div class="porto-body"><div class="porto-title">Analisis Pajak PPh Badan 2023</div><div class="porto-desc">Rekonsiliasi fiskal & laporan SPT PT. Mitra Jaya — berhasil menghemat pajak terutang 8%</div></div></div>
+          <div class="porto-card"><div class="porto-thumb pt-blue">📑</div><div class="porto-body"><div class="porto-title">Tax Planning UMKM Semester I</div><div class="porto-desc">Strategi efisiensi pajak untuk 5 klien UMKM skala menengah di Bandung</div></div></div>
+          <div class="porto-card"><div class="porto-thumb pt-amber">📋</div><div class="porto-body"><div class="porto-title">Audit VAT Reconciliation</div><div class="porto-desc">Pemeriksaan PPN untuk 3 perusahaan manufaktur — zero discrepancy final report</div></div></div>
+        </div>
+      </div>
+
+      <div class="profile-section">
+        <div class="ps-title"><i class="ti ti-tools"></i> Keahlian</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <span class="tag" style="font-size:13px;padding:5px 14px">Perpajakan PPh Badan</span>
+          <span class="tag" style="font-size:13px;padding:5px 14px">VAT Reconciliation</span>
+          <span class="tag" style="font-size:13px;padding:5px 14px">Rekonsiliasi Fiskal</span>
+          <span class="tag tag-blue" style="font-size:13px;padding:5px 14px">SAP Finance S/4HANA</span>
+          <span class="tag tag-blue" style="font-size:13px;padding:5px 14px">Microsoft Excel Advanced</span>
+          <span class="tag tag-violet" style="font-size:13px;padding:5px 14px">Tax Planning</span>
+          <span class="tag tag-amber" style="font-size:13px;padding:5px 14px">Konsultasi UMKM</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="profile-sidebar">
+      <div class="profile-section">
+        <div class="ps-title"><i class="ti ti-certificate"></i> Sertifikat</div>
+        <div class="cert-list">
+          <div class="cert-item" style="padding:10px"><div class="cert-icon"><i class="ti ti-certificate"></i></div><div><div class="cert-name">Brevet Pajak A & B</div><div class="cert-issuer">IKPI · Mei 2024</div></div><span class="cert-badge cert-valid"><i class="ti ti-circle-check" style="font-size:10px"></i></span></div>
+          <div class="cert-item" style="padding:10px"><div class="cert-icon"><i class="ti ti-certificate"></i></div><div><div class="cert-name">SAP FI S/4HANA</div><div class="cert-issuer">SAP SE · Jan 2024</div></div><span class="cert-badge cert-valid"><i class="ti ti-circle-check" style="font-size:10px"></i></span></div>
+          <div class="cert-item" style="padding:10px"><div class="cert-icon"><i class="ti ti-certificate"></i></div><div><div class="cert-name">CPA Foundation</div><div class="cert-issuer">IAPI · Agu 2023</div></div><span class="cert-badge cert-valid"><i class="ti ti-circle-check" style="font-size:10px"></i></span></div>
+        </div>
+      </div>
+
+      <div class="profile-section">
+        <div class="ps-title"><i class="ti ti-school"></i> Pendidikan</div>
+        <div style="display:flex;gap:12px">
+          <div class="cert-icon" style="margin-top:2px"><i class="ti ti-building"></i></div>
+          <div>
+            <div style="font-size:14px;font-weight:600;color:var(--navy)">D-4 Akuntansi Pajak</div>
+            <div style="font-size:12px;color:var(--blue);margin-top:2px">Sekolah Vokasi Unpad</div>
+            <div style="font-size:12px;color:var(--gray-400);margin-top:2px">Lulus 2021 · IPK 3.76</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-section">
+        <div class="ps-title"><i class="ti ti-link"></i> Kontak</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--gray-700)"><i class="ti ti-mail" style="color:var(--blue);font-size:16px"></i> dinda@email.com</div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--gray-700)"><i class="ti ti-brand-whatsapp" style="color:#25D366;font-size:16px"></i> +62 812-xxxx-xxxx</div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--blue);cursor:pointer"><i class="ti ti-brand-linkedin" style="color:#0077B5;font-size:16px"></i> linkedin.com/in/dinda-r</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page-profile -->
+
+
+<!-- Toast -->
+<div class="toast" id="toast"><i class="ti ti-circle-check"></i><span id="toast-msg">Berhasil!</span></div>
+
+<script>
+// Page navigation with history stack (browser back/forward does NOT apply inside this artifact,
+// so we track the stack ourselves to make "kembali" buttons work reliably)
+let pageHistory = ['page-landing'];
+
+function goTo(pageId, addToHistory = true) {
+  const current = document.querySelector('.page.active');
+  const currentId = current ? current.id : null;
+
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(pageId).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  if (addToHistory && currentId && currentId !== pageId) {
+    pageHistory.push(currentId);
+  }
+}
+
+function goBack() {
+  const prev = pageHistory.pop() || 'page-landing';
+  goTo(prev, false);
+}
+
+// Filter chips
+function setChip(el) {
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// Role selector
+function selectRole(role) {
+  const lulCard = document.getElementById('role-lul');
+  const recCard = document.getElementById('role-rec');
+  const lulFields = document.getElementById('lul-fields');
+  const recFields = document.getElementById('rec-fields');
+
+  if (role === 'lul') {
+    lulCard.classList.add('selected');
+    recCard.classList.remove('selected');
+    lulFields.classList.add('show');
+    recFields.classList.remove('show');
+  } else {
+    recCard.classList.add('selected');
+    lulCard.classList.remove('selected');
+    recFields.classList.add('show');
+    lulFields.classList.remove('show');
+  }
+}
+
+// Toast
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  const toastMsg = document.getElementById('toast-msg');
+  toastMsg.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+// Filter chip toggle for recruiter
+document.querySelectorAll('.filter-chip').forEach(chip => {
+  chip.addEventListener('click', function() {
+    this.classList.toggle('on');
+  });
+});
+</script>
+
+</body>
+</html>
